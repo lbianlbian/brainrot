@@ -19,11 +19,10 @@ import Info from "./info";
 const QUESTIONS_IN_QUIZ = 15;
 const QUESTION_TIME = 10;
 const ANSWER_CHOICES = 3;
-const BRAINROT_MINT = new PublicKey("SMUSDBKt1cydTsvZmSHBS2CWAoi32FWPdFD7u9SwH3w");
-const TOKEN_2022_PROGRAM = new PublicKey("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb");
+const TOKEN_PROGRAM = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 
 export default function Quiz(props) {
-  const setErrmsg = props.setErrmsg;
+  let mintAddr = props.mintAddr;  // props must be passed in as props instead of {mintAddr} because AppTheme relies on props
   const [isLoading, setIsLoading] = React.useState(false);
   const [question, setQuestion] = React.useState(null);
   const [questionsAnswered, setQuestionsAnswered] = React.useState(0);
@@ -102,9 +101,10 @@ export default function Quiz(props) {
       return;
     }
     setIsLoading(true);
-    let userATA = await getAssociatedTokenAddress(BRAINROT_MINT, publicKey, false, TOKEN_2022_PROGRAM);
+    let brainrotMint = new PublicKey(mintAddr);
+    let userATA = await getAssociatedTokenAddress(brainrotMint, publicKey, false, TOKEN_PROGRAM);
     // Create transfer instruction
-    let burnInstr = createBurnInstruction(userATA, BRAINROT_MINT, publicKey, 100, [], TOKEN_2022_PROGRAM)
+    let burnInstr = createBurnInstruction(userATA, brainrotMint, publicKey, 100, [], TOKEN_PROGRAM)
     let transaction = new Transaction();
     transaction.add(burnInstr);
     const signature = await sendTransaction(transaction, connection);

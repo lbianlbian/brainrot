@@ -4,10 +4,8 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Paper } from '@mui/material';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
 
+import LandingPage from "./components/landing";
 import Quiz from './components/quiz';
 import TopBar from './components/topbar';
 // maybe add music later import Music from "./components/music";
@@ -15,6 +13,8 @@ import './App.css';
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
+
+const mintAddr = "H7N32aQTRGDHTJGKx56ZTT5NdYy4HuTayJD9DmWomhtS";
 
 //function App(){
 export const App = () => {
@@ -42,43 +42,18 @@ export const App = () => {
     [prefersDarkMode],
   );
 
-  const [errmsg, setErrmsg] = React.useState("");
+  const [page, setPage] = React.useState("landing");
 
   return (
     <ThemeProvider theme={theme}>
       <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
               <WalletModalProvider>
-                {/*<Paper
-                  sx={{
-                      minHeight: '100vh',
-                      display: 'flex',
-                      flexDirection: 'column',
-                  }}
-                >*/}
-                  <Box
-                    component="div"
-                    sx={{
-                      position: 'fixed',
-                      top: 0,
-                      left: 0,
-                      width: '100vw',
-                      height: '100vh',
-                      zIndex: -1,
-                      backgroundImage: 'url(/logo.png)',
-                      backgroundRepeat: 'repeat',          // repeat the image
-                      backgroundPosition: 'top left',     // start from top left
-                      backgroundSize: 'auto',              // default size, no scaling
-                      backgroundAttachment: 'fixed',      // optional: fixes image 
-                    }}
-                  />
-                  <TopBar />
-                  <Quiz setErrmsg={setErrmsg} />
-                  {errmsg == "" ? 
-                    (<></>) : 
-                    (<Alert severity="error" variant="filled">{errmsg}</Alert>)
+                  <TopBar setPage={setPage}/>
+                  {page == "landing" ? 
+                    <LandingPage mintAddr={mintAddr} setPage={setPage} /> : 
+                    <Quiz mintAddr={mintAddr} />
                   }
-                {/*</Paper>*/}
               </WalletModalProvider>
           </WalletProvider>
       </ConnectionProvider>

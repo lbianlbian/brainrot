@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
 
-function TopBar() {
+function TopBar({setPage}) {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -54,6 +54,7 @@ function TopBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            onClick={() => {setPage("landing")}}
           >
             Memes Brainrot
           </Typography>
@@ -89,6 +90,9 @@ function TopBar() {
               <MenuItem key="twitter" onClick={openTwitter}>
                 <Typography sx={{ textAlign: 'center' }}>Twitter/X </Typography>
               </MenuItem>
+              <MenuItem key="twitter" onClick={() => {setPage("quiz")}}>
+                <Typography sx={{ textAlign: 'center' }}>Play Trivia </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           {/* mobile title */}
@@ -106,6 +110,7 @@ function TopBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            onClick={() => {setPage("landing")}}
           >
             Memes Brainrot
           </Typography>
@@ -117,6 +122,13 @@ function TopBar() {
               onClick={openTwitter}
             >
               Twitter/X
+            </Button>
+            <Button
+              key="twitterDesktop"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={() => {setPage("quiz")}}
+            >
+              Play Trivia
             </Button>
           </Box>
           <WalletMultiButton style={walletStyle}/>

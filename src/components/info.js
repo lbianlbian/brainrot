@@ -8,11 +8,7 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
-import { PublicKey } from '@solana/web3.js';
-
-const BRAINROT_MINT = new PublicKey("SMUSDBKt1cydTsvZmSHBS2CWAoi32FWPdFD7u9SwH3w");
-
-function Info(){
+function Info({mintAddr}){
     return (
     <Box sx={{
         background: 'linear-gradient(135deg, #121212 30%, #1e3a8a 90%)',
@@ -104,7 +100,7 @@ function Info(){
               fontSize: '0.85rem'
             }}
           >
-            {BRAINROT_MINT.toBase58()}
+            {mintAddr}
           </Typography>
         </Box>
       </Box>
