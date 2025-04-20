@@ -1,0 +1,16 @@
+{
+    "name": "Memes Brainrot",
+    "symbol": "MBR",
+    "description": "Solana token powering the memes brainrot ecosystem",
+    "image": "https://memesbrainrot.com/logo.png",
+    "attributes": [
+        {"trait_type": "testing", "value": "testing"}
+    ],
+    "properties": {
+        "files": [
+            {"uri": "logo.png", "type": "image/png"}
+        ],
+        "category": "token"
+    }
+}
+  
