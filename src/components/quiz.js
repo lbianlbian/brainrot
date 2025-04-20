@@ -140,7 +140,7 @@ export default function Quiz(props) {
       <Container direction="column" justifyContent="space-between">
         <Card variant="outlined">
             {question == null ? 
-                <Info />
+                <Info mintAddr={mintAddr}/>
                 :
                 <>
                     <Typography
