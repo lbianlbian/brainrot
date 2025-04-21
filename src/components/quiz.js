@@ -8,7 +8,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { PublicKey, Transaction } from '@solana/web3.js';
-import { getAssociatedTokenAddress, createBurnInstruction } from '@solana/spl-token';
+import { getAssociatedTokenAddress, createBurnInstruction, getAccount } from '@solana/spl-token';
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 import AppTheme from './styling/AppTheme';
@@ -72,7 +72,7 @@ export default function Quiz(props) {
   }, [question, questionsAnswered]);
 
   async function failed(){
-    setSnackbarMsg("Sorry you failed the quiz play again?");
+    setSnackbarMsg("Sorry, you failed the quiz. Play again?");
     setOpen(true);
     setQuestion(null);
     setQuestionsAnswered(0);
@@ -88,7 +88,6 @@ export default function Quiz(props) {
     answers[randIndCorrect % 3] = correct.name;
     answers[(randIndCorrect + 1) % 3] = incorrect1.name;
     answers[(randIndCorrect + 2) % 3] = incorrect2.name;
-    console.log(correct.name);
     setQuestion({
       picture: `pics/${correct.picture}`,
       answers: answers,
@@ -103,13 +102,35 @@ export default function Quiz(props) {
     setIsLoading(true);
     let brainrotMint = new PublicKey(mintAddr);
     let userATA = await getAssociatedTokenAddress(brainrotMint, publicKey, false, TOKEN_PROGRAM);
+    try{
+      await getAccount(connection, userATA);
+    } catch(err){
+      setSnackbarMsg("Please purchase MBR first. See link in navigation bar.");
+      setOpen(true);
+      setIsLoading(false);
+      return;
+    }
     // Create transfer instruction
     let burnInstr = createBurnInstruction(userATA, brainrotMint, publicKey, 100, [], TOKEN_PROGRAM)
     let transaction = new Transaction();
     transaction.add(burnInstr);
     const signature = await sendTransaction(transaction, connection);
     console.log(`Transaction signature: ${signature}`);
-
+    try{
+      await connection.confirmTransaction(signature);
+      const status = await connection.getSignatureStatus(signature, {
+        searchTransactionHistory: true
+      });
+    
+      if (status.value?.err) {
+        throw Error("tx was confirmed but was a failed tx");
+      }
+    } catch(err){
+      setSnackbarMsg("Sorry, your transaction didn't go through. Please try again. ");
+      setOpen(true);
+      setIsLoading(false);
+      return;
+    }
     loadQuestion();
     setIsLoading(false);
   }
@@ -120,7 +141,7 @@ export default function Quiz(props) {
         setQuestionsAnswered(questionsAnswered + 1);
         // for whatever reason above line doesn't update questionsAnswered until next render
         if(questionsAnswered + 1 == QUESTIONS_IN_QUIZ){  
-            setSnackbarMsg("You won! Take a screenshot of this message and DM us on discord with your wallet to get an exclusive Brainrot NFT soon!");
+            setSnackbarMsg("You won! Take a screenshot of this message and DM us on Discord with your wallet to get an exclusive Brainrot NFT soon!");
             setOpen(true);
             setQuestion(null);
             setQuestionsAnswered(0);

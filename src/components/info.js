@@ -48,7 +48,7 @@ function Info({mintAddr}){
               <LocalFireDepartmentIcon />
             </ListItemIcon>
             <ListItemText 
-              primary="Burn 100 $BRAINROT to start"
+              primary="Burn 100 MBR to start"
               primaryTypographyProps={{
                 variant: 'body1',
                 sx: { fontWeight: 500, color: '#f8fafc' }

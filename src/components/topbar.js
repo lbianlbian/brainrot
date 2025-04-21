@@ -90,7 +90,7 @@ function TopBar({setPage}) {
               <MenuItem key="twitter" onClick={openTwitter}>
                 <Typography sx={{ textAlign: 'center' }}>Twitter/X </Typography>
               </MenuItem>
-              <MenuItem key="twitter" onClick={() => {setPage("quiz")}}>
+              <MenuItem key="quiz" onClick={() => {setPage("quiz")}}>
                 <Typography sx={{ textAlign: 'center' }}>Play Trivia </Typography>
               </MenuItem>
             </Menu>
@@ -124,7 +124,7 @@ function TopBar({setPage}) {
               Twitter/X
             </Button>
             <Button
-              key="twitterDesktop"
+              key="quizDesktop"
               sx={{ my: 2, color: 'white', display: 'block' }}
               onClick={() => {setPage("quiz")}}
             >
