@@ -14,15 +14,15 @@ import './App.css';
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-const mintAddr = "H7N32aQTRGDHTJGKx56ZTT5NdYy4HuTayJD9DmWomhtS";
+const mintAddr = "FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
 
 //function App(){
 export const App = () => {
     // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork.Devnet;
+  const network = WalletAdapterNetwork.Mainnet;
 
   // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => "https://devnet.helius-rpc.com/?api-key=2be97c7b-0edf-4b14-9a19-236bc6c87135", [network]);
+  const endpoint = useMemo(() => "https://mainnet.helius-rpc.com/?api-key=2be97c7b-0edf-4b14-9a19-236bc6c87135", [network]);
 
   const wallets = useMemo(
       () => [],  // empty array means only show wallets that user has installed
