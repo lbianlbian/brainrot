@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
+const PURCHASE_URL = "https://photon-sol.tinyastro.io/en/lp/EhBPjWztDbzUrwZW2AYGudRWF9XdP3nrNPhCGQevwE5t";
 
 function TopBar({setPage}) {
 
@@ -29,6 +30,10 @@ function TopBar({setPage}) {
 
   function openTwitter(){
     window.open(TWITTER_URL, "_blank")
+  }
+
+  function openPurchase(){
+    window.open(PURCHASE_URL, "_blank");
   }
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -93,6 +98,9 @@ function TopBar({setPage}) {
               <MenuItem key="quiz" onClick={() => {setPage("quiz")}}>
                 <Typography sx={{ textAlign: 'center' }}>Play Trivia </Typography>
               </MenuItem>
+              <MenuItem key="buy" onClick={openPurchase}>
+                <Typography sx={{ textAlign: 'center' }}>Buy MBR </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           {/* mobile title */}
@@ -129,6 +137,13 @@ function TopBar({setPage}) {
               onClick={() => {setPage("quiz")}}
             >
               Play Trivia
+            </Button>
+            <Button
+              key="buyDesktop"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={openPurchase}
+            >
+              Buy MBR
             </Button>
           </Box>
           <WalletMultiButton style={walletStyle}/>
