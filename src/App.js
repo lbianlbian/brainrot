@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import LandingPage from "./components/landing";
 import Quiz from './components/quiz';
 import TopBar from './components/topbar';
+import Wiki from "./components/wiki";
 // maybe add music later import Music from "./components/music";
 import './App.css';
 
@@ -52,7 +53,9 @@ export const App = () => {
                   <TopBar setPage={setPage}/>
                   {page == "landing" ? 
                     <LandingPage mintAddr={mintAddr} setPage={setPage} /> : 
-                    <Quiz mintAddr={mintAddr} />
+                    page == "quiz" ?
+                      <Quiz mintAddr={mintAddr} /> : 
+                      <Wiki />
                   }
               </WalletModalProvider>
           </WalletProvider>

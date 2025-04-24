@@ -93,13 +93,16 @@ function TopBar({setPage}) {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               <MenuItem key="twitter" onClick={openTwitter}>
-                <Typography sx={{ textAlign: 'center' }}>Twitter/X </Typography>
+                <Typography sx={{ textAlign: 'center' }}>Twitter/X</Typography>
               </MenuItem>
               <MenuItem key="quiz" onClick={() => {setPage("quiz")}}>
-                <Typography sx={{ textAlign: 'center' }}>Play Trivia </Typography>
+                <Typography sx={{ textAlign: 'center' }}>Play Trivia</Typography>
               </MenuItem>
               <MenuItem key="buy" onClick={openPurchase}>
-                <Typography sx={{ textAlign: 'center' }}>Buy MBR </Typography>
+                <Typography sx={{ textAlign: 'center' }}>Buy MBR</Typography>
+              </MenuItem>
+              <MenuItem key="wiki" onClick={() => {setPage("wiki")}}>
+                <Typography sx={{ textAlign: 'center' }}>Wiki</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -144,6 +147,13 @@ function TopBar({setPage}) {
               onClick={openPurchase}
             >
               Buy MBR
+            </Button>
+            <Button
+              key="wikiDesktop"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={() => {setPage("wiki")}}
+            >
+              Wiki
             </Button>
           </Box>
           <WalletMultiButton style={walletStyle}/>
