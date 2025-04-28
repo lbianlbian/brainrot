@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
-const PURCHASE_URL = "https://raydium.io/swap/?inputMint=sol&outputMint=FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
+const PURCHASE_URL = "https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
 
 function TopBar({setPage}) {
 
@@ -33,9 +33,11 @@ function TopBar({setPage}) {
   }
 
   function openPurchase(){
-    let width = 400;
-    let left = window.screen.width - width * 1.1; // Right-align calculation
-    window.open("/buymbr.html", "_blank", `width=${width},height=600,left=${left}`).focus();
+    window.open(PURCHASE_URL, "_blank");
+  }
+
+  function openWhitepaper(){
+    window.open("whitepaper.pdf", "_blank");
   }
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -106,6 +108,9 @@ function TopBar({setPage}) {
               <MenuItem key="wiki" onClick={() => {setPage("wiki")}}>
                 <Typography sx={{ textAlign: 'center' }}>Wiki</Typography>
               </MenuItem>
+              <MenuItem key="whitepaper" onClick={openWhitepaper}>
+                <Typography sx={{ textAlign: 'center' }}>Whitepaper</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           {/* mobile title */}
@@ -156,6 +161,13 @@ function TopBar({setPage}) {
               onClick={() => {setPage("wiki")}}
             >
               Wiki
+            </Button>
+            <Button
+              key="whitepaperDesktop"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={openWhitepaper}
+            >
+              Whitepaper
             </Button>
           </Box>
           <WalletMultiButton style={walletStyle}/>

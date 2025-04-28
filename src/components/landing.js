@@ -83,7 +83,7 @@ const LandingPage = ({mintAddr, setPage}) => {
               wordBreak: 'break-word'
             }}
           >
-            MBR: {mintAddr}
+            MBR: The Universe of Memes!
           </Typography>
           
           <Button

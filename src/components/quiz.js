@@ -31,6 +31,7 @@ export default function Quiz(props) {
   const [snackbarMsg, setSnackbarMsg] = React.useState('');
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected } = useWallet();
+  let encounteredQs = new Set([]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -80,12 +81,20 @@ export default function Quiz(props) {
 
   async function loadQuestion(){
     // sample random picture, then 2 more distinct ones
-    let randIndCorrect = Math.floor(Math.random() * info.length);
-    let correct = info[randIndCorrect];
-    let incorrect1 = info[(randIndCorrect + 1) % info.length];
-    let incorrect2 = info[(randIndCorrect + 2) % info.length];
+    let filteredInfo = [];
+    for(let character of info){
+      if(encounteredQs.has(character.name)){
+        continue;
+      }
+      filteredInfo.push(character);
+    }
+    let randIndCorrect = Math.floor(Math.random() * filteredInfo.length);
+    let correct = filteredInfo[randIndCorrect];
+    let incorrect1 = filteredInfo[(randIndCorrect + 1) % filteredInfo.length];
+    let incorrect2 = filteredInfo[(randIndCorrect + 2) % filteredInfo.length];
     let answers = ["", "", ""];
     answers[randIndCorrect % 3] = correct.name;
+    encounteredQs.add(correct.name);
     answers[(randIndCorrect + 1) % 3] = incorrect1.name;
     answers[(randIndCorrect + 2) % 3] = incorrect2.name;
     setQuestion({
@@ -145,6 +154,7 @@ export default function Quiz(props) {
             setOpen(true);
             setQuestion(null);
             setQuestionsAnswered(0);
+            encounteredQs = new Set([]);
         }
         else{
             loadQuestion();
@@ -152,6 +162,7 @@ export default function Quiz(props) {
     }
     else{
         failed();
+        encounteredQs = new Set([]);
     }
     setIsLoading(false);
   };
