@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
-const PURCHASE_URL = "https://photon-sol.tinyastro.io/en/lp/EhBPjWztDbzUrwZW2AYGudRWF9XdP3nrNPhCGQevwE5t";
+const PURCHASE_URL = "https://raydium.io/swap/?inputMint=sol&outputMint=FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
 
 function TopBar({setPage}) {
 
@@ -33,7 +33,9 @@ function TopBar({setPage}) {
   }
 
   function openPurchase(){
-    window.open(PURCHASE_URL, "_blank");
+    let width = 400;
+    let left = window.screen.width - width * 1.1; // Right-align calculation
+    window.open("/buymbr.html", "_blank", `width=${width},height=600,left=${left}`).focus();
   }
 
   const isMobile = useMediaQuery({ maxWidth: 768 });

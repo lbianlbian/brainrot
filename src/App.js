@@ -44,7 +44,6 @@ export const App = () => {
   );
 
   const [page, setPage] = React.useState("landing");
-
   return (
     <ThemeProvider theme={theme}>
       <ConnectionProvider endpoint={endpoint}>
@@ -57,7 +56,7 @@ export const App = () => {
                       <Quiz mintAddr={mintAddr} /> : 
                       <Wiki />
                   }
-              </WalletModalProvider>
+            </WalletModalProvider>
           </WalletProvider>
       </ConnectionProvider>
     </ThemeProvider>
