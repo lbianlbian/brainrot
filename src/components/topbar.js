@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
-const PURCHASE_URL = "https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
+const PURCHASE_URL = "https://jup.ag/swap/USDC-FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
 
 function TopBar({setPage}) {
 
