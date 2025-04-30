@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 function Info({mintAddr}){
     return (
@@ -73,6 +74,18 @@ function Info({mintAddr}){
             </ListItemIcon>
             <ListItemText 
               primary="Get 15 right to win a Brainrot NFT!"
+              primaryTypographyProps={{
+                variant: 'body1',
+                sx: { fontWeight: 500, color: '#f8fafc' }
+              }}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon sx={{ color: '#8b5cf6', minWidth: 40 }}>
+              <HelpOutlineIcon />
+            </ListItemIcon>
+            <ListItemText 
+              primary="Read the wiki to learn the trivia characters"
               primaryTypographyProps={{
                 variant: 'body1',
                 sx: { fontWeight: 500, color: '#f8fafc' }
