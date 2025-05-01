@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
 const PURCHASE_URL = "https://jup.ag/swap/USDC-FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
+const TELEGRAM_URL = "https://t.me/+b85GXLBnM6oyMmU5";
 
 function TopBar({setPage}) {
 
@@ -38,6 +39,10 @@ function TopBar({setPage}) {
 
   function openWhitepaper(){
     window.open("whitepaper.pdf", "_blank");
+  }
+
+  function openTelegram(){
+    window.open(TELEGRAM_URL, "_blank");
   }
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -111,6 +116,9 @@ function TopBar({setPage}) {
               <MenuItem key="whitepaper" onClick={openWhitepaper}>
                 <Typography sx={{ textAlign: 'center' }}>Whitepaper</Typography>
               </MenuItem>
+              <MenuItem key="telegram" onClick={openTelegram}>
+                <Typography sx={{ textAlign: 'center' }}>Telegram</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           {/* mobile title */}
@@ -168,6 +176,13 @@ function TopBar({setPage}) {
               onClick={openWhitepaper}
             >
               Whitepaper
+            </Button>
+            <Button
+              key="telegramDesktop"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={openTelegram}
+            >
+              Telegram
             </Button>
           </Box>
           <WalletMultiButton style={walletStyle}/>
