@@ -18,6 +18,13 @@ const PURCHASE_URL = "https://jup.ag/swap/USDC-FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmX
 const TELEGRAM_URL = "https://t.me/+b85GXLBnM6oyMmU5";
 
 function TopBar({setPage}) {
+  const topbarElements = [
+    {name: "Buy MBR", onclick: () => {window.open(PURCHASE_URL, "_blank")}},
+    {name: "Play Trivia", onclick: () => {setPage("quiz")}},
+    {name: "Wiki", onclick: () => {setPage("wiki")}},
+    {name: "Whitepaper", onclick: () => {window.open("whitepaper.pdf", "_blank")}},
+  
+  ]
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -28,22 +35,6 @@ function TopBar({setPage}) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  function openTwitter(){
-    window.open(TWITTER_URL, "_blank")
-  }
-
-  function openPurchase(){
-    window.open(PURCHASE_URL, "_blank");
-  }
-
-  function openWhitepaper(){
-    window.open("whitepaper.pdf", "_blank");
-  }
-
-  function openTelegram(){
-    window.open(TELEGRAM_URL, "_blank");
-  }
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
@@ -101,24 +92,11 @@ function TopBar({setPage}) {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              <MenuItem key="twitter" onClick={openTwitter}>
-                <Typography sx={{ textAlign: 'center' }}>Twitter/X</Typography>
-              </MenuItem>
-              <MenuItem key="quiz" onClick={() => {setPage("quiz")}}>
-                <Typography sx={{ textAlign: 'center' }}>Play Trivia</Typography>
-              </MenuItem>
-              <MenuItem key="buy" onClick={openPurchase}>
-                <Typography sx={{ textAlign: 'center' }}>Buy MBR</Typography>
-              </MenuItem>
-              <MenuItem key="wiki" onClick={() => {setPage("wiki")}}>
-                <Typography sx={{ textAlign: 'center' }}>Wiki</Typography>
-              </MenuItem>
-              <MenuItem key="whitepaper" onClick={openWhitepaper}>
-                <Typography sx={{ textAlign: 'center' }}>Whitepaper</Typography>
-              </MenuItem>
-              <MenuItem key="telegram" onClick={openTelegram}>
-                <Typography sx={{ textAlign: 'center' }}>Telegram</Typography>
-              </MenuItem>
+              {topbarElements.map((topbarEl) => (
+                <MenuItem key={topbarEl.name} onClick={topbarEl.onclick}>
+                  <Typography sx={{ textAlign: 'center' }}>{topbarEl.name}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
           {/* mobile title */}
@@ -142,48 +120,15 @@ function TopBar({setPage}) {
           </Typography>
           {/* Desktop Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              key="twitterDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={openTwitter}
-            >
-              Twitter/X
-            </Button>
-            <Button
-              key="quizDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={() => {setPage("quiz")}}
-            >
-              Play Trivia
-            </Button>
-            <Button
-              key="buyDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={openPurchase}
-            >
-              Buy MBR
-            </Button>
-            <Button
-              key="wikiDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={() => {setPage("wiki")}}
-            >
-              Wiki
-            </Button>
-            <Button
-              key="whitepaperDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={openWhitepaper}
-            >
-              Whitepaper
-            </Button>
-            <Button
-              key="telegramDesktop"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              onClick={openTelegram}
-            >
-              Telegram
-            </Button>
+            {topbarElements.map((topbarEl) => (
+              <Button
+                key={`${topbarEl.name}Desktop`}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={topbarEl.onclick}
+              >
+                {topbarEl.name}
+              </Button>
+            ))}
           </Box>
           <WalletMultiButton style={walletStyle}/>
         </Toolbar>
