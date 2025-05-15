@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
 const PURCHASE_URL = "https://jup.ag/swap/USDC-FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
 const TELEGRAM_URL = "https://t.me/+b85GXLBnM6oyMmU5";
+const MINIGAMES_URL = "https://minigames.memesbrainrot.com"
 
 function TopBar({setPage}) {
   const topbarElements = [
@@ -23,7 +24,7 @@ function TopBar({setPage}) {
     {name: "Play Trivia", onclick: () => {setPage("quiz")}},
     {name: "Wiki", onclick: () => {setPage("wiki")}},
     {name: "Whitepaper", onclick: () => {window.open("whitepaper.pdf", "_blank")}},
-  
+    {name: "Minigames", onclick: () => {window.open(MINIGAMES_URL, "_blank")}}
   ]
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
