@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
@@ -44,12 +44,13 @@ export const App = () => {
   );
 
   const [page, setPage] = React.useState("landing");
+
   return (
     <ThemeProvider theme={theme}>
       <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
               <WalletModalProvider>
-                  <TopBar setPage={setPage}/>
+                  <TopBar setPage={setPage} mintAddr={mintAddr} />
                   {page == "landing" ? 
                     <LandingPage mintAddr={mintAddr} setPage={setPage} /> : 
                     page == "quiz" ?

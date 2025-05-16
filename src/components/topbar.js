@@ -1,6 +1,8 @@
 import {WalletMultiButton} from '@solana/wallet-adapter-react-ui';
 import * as React from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {PublicKey} from "@solana/web3.js";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,16 +20,37 @@ const PURCHASE_URL = "https://raydium.io/swap/?inputMint=FT6vNHhWAbmpsnqwm9zhJLv
 const TELEGRAM_URL = "https://t.me/+b85GXLBnM6oyMmU5";
 const MINIGAMES_URL = "https://minigames.memesbrainrot.com"
 
-function TopBar({setPage}) {
-  const topbarElements = [
+function TopBar({setPage, mintAddr}) {
+
+  const { connection } = useConnection();
+  const { publicKey } = useWallet();
+  const [bal, setBal] = React.useState("Connect wallet");
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  React.useEffect(() => {
+    if(publicKey){
+      (async () => {
+        let tokAccs = await connection.getTokenAccountsByOwner(publicKey, {mint: new PublicKey(mintAddr)});
+        if(tokAccs.value.length == 0){
+          setBal("Buy MBR!");
+        }
+        else{
+          let tokAcc = tokAccs.value[0].pubkey;
+          let bal = (await connection.getTokenAccountBalance(tokAcc)).value.amount;  // no need to consider decimals b/c mbr has 0 
+          setBal(`${bal} MBR`);
+        }
+      })();
+    }
+  }, [publicKey]);
+
+  let topbarElements = [
     {name: "Buy MBR", onclick: () => {window.open(PURCHASE_URL, "_blank")}},
     {name: "Play Trivia", onclick: () => {setPage("quiz")}},
     {name: "Wiki", onclick: () => {setPage("wiki")}},
     {name: "Whitepaper", onclick: () => {window.open("whitepaper.pdf", "_blank")}},
-    {name: "Minigames", onclick: () => {window.open(MINIGAMES_URL, "_blank")}}
+    {name: "Minigames", onclick: () => {window.open(MINIGAMES_URL, "_blank")}},
+    {name: `Your balance: ${bal}`, onclick: () => {}}
   ]
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
