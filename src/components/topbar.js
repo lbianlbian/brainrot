@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const TWITTER_URL = "https://twitter.com/MemesBrainrot";
-const PURCHASE_URL = "https://jup.ag/swap/USDC-FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs";
+const PURCHASE_URL = "https://raydium.io/swap/?inputMint=FT6vNHhWAbmpsnqwm9zhJLvbqLQXtqWmXJjESQpuvdPs&outputMint=sol";
 const TELEGRAM_URL = "https://t.me/+b85GXLBnM6oyMmU5";
 const MINIGAMES_URL = "https://minigames.memesbrainrot.com"
 
