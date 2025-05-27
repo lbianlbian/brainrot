@@ -4,6 +4,7 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Analytics } from "@vercel/analytics/react"
 
 import LandingPage from "./components/landing";
 import Quiz from './components/quiz';
@@ -57,6 +58,7 @@ export const App = () => {
                       <Quiz mintAddr={mintAddr} /> : 
                       <Wiki />
                   }
+                  <Analytics />
             </WalletModalProvider>
           </WalletProvider>
       </ConnectionProvider>
